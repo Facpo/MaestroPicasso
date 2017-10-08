@@ -1,12 +1,11 @@
-# Two stage example Virtual Machine file
-# moves get set in Main
-# usb port needs to be set in initInterfaces
-# Nadya Peek Dec 2014
 
-#------IMPORTS-------
-from pygestalt import nodes
-from pygestalt import interfaces
-from pygestalt import machines
+
+
+
+# Modified Code from https://github.com/nadya/pygestalt by Nadya Peek
+# Adapted for the purposes of a fabacademy final project by Francois Auclair
+
+
 from pygestalt import functions
 from pygestalt.machines import elements
 from pygestalt.machines import kinematics
