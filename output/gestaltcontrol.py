@@ -74,7 +74,7 @@ class virtualMachine(machines.virtualMachine):
 def svgtoarray(filecontent):
 	
 	moves = []
-	for  line in f.readlines():
+	for  line in filecontent.readlines():
                 if line.startswith("d="):
                         moves.append(line[3:-2])
 
@@ -102,8 +102,6 @@ if __name__ == '__main__':
 	f = open('waves.svg','r')
 	filestring = f.readlines()
 	 
-
-
 	#Create move array
 	moves = svgtoarray(filestring)
 
@@ -116,7 +114,6 @@ if __name__ == '__main__':
 			time.sleep(0.001)
 			status = stages.xAxisNode.spinStatusRequest()	
 
-	
 
 	# This is for how fast the 
 	stages.xyNode.setVelocityRequest(8)	
