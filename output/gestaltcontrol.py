@@ -1,11 +1,9 @@
-
-
-
-
 # Modified Code from https://github.com/nadya/pygestalt by Nadya Peek
 # Adapted for the purposes of a fabacademy final project by Francois Auclair
 
 
+
+from pygestalt import machines
 from pygestalt import functions
 from pygestalt.machines import elements
 from pygestalt.machines import kinematics
@@ -69,6 +67,21 @@ class virtualMachine(machines.virtualMachine):
 		#self.machineControl.pwmRequest(speedFraction)
 		pass
 
+
+
+
+def svgtoarray(filecontent):
+	
+	moves = []
+	for  line in f.readlines():
+                if line.startswith("d="):
+                        moves.append(line[3:-2])
+
+                else:      
+                        pass
+	print(moves)
+	return moves 
+
 #------IF RUN DIRECTLY FROM TERMINAL------
 if __name__ == '__main__':
 	# The persistence file remembers the node you set. It'll generate the first time you run the
@@ -84,11 +97,14 @@ if __name__ == '__main__':
 	#stages.xyNode.setMotorCurrent(0.7)
         
 	#Get file content
-	filestring = getfile ("waves.svg")
+	
+	f = open('waves.svg','r')
+	filestring = f.readlines()
+	 
 
 
 	#Create move array
-	moves = svgtoarray (filestring)
+	moves = svgtoarray(filestring)
 
 	# Move!
 	for move in moves:
@@ -99,15 +115,6 @@ if __name__ == '__main__':
 			time.sleep(0.001)
 			status = stages.xAxisNode.spinStatusRequest()	
 
-        #chercher notre data
-	f = open('waves.svg','r')
-	moves = []
-	for  i,line in enumerate(f.readlines()):
-                if line.find() == -1:
-                        pass
-                else:      
-                        move = str.startswith ('d="') 
-                        moves.append(move)
 	
 
 	# This is for how fast the 
