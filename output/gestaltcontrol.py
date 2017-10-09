@@ -75,6 +75,21 @@ if __name__ == '__main__':
 	# The A4982 has max 2A of current, running the widget will interactively help you set. 
 	#stages.xyNode.setMotorCurrent(0.7)
         
+	#Get file content
+	filestring = getfile ("waves.svg")
+
+
+	#Create move array
+	moves = svgtoarray (filestring)
+
+	# Move!
+	for move in moves:
+		stages.move(move, 0)
+		status = stages.xAxisNode.spinStatusRequest()
+		# This checks to see if the move is done.
+		while status['stepsRemaining'] > 0:
+			time.sleep(0.001)
+			status = stages.xAxisNode.spinStatusRequest()	
 
         #chercher notre data
 	f = open('waves.svg','r')
@@ -92,14 +107,6 @@ if __name__ == '__main__':
 	
 	
 	
-	# Move!
-	for move in moves:
-		stages.move(move, 0)
-		status = stages.xAxisNode.spinStatusRequest()
-		# This checks to see if the move is done.
-		while status['stepsRemaining'] > 0:
-			time.sleep(0.001)
-			status = stages.xAxisNode.spinStatusRequest()	
 	
 
 
