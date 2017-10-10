@@ -71,23 +71,22 @@ class virtualMachine(machines.virtualMachine):
 
 
 
-def svgtoarray(filecontent):
-	
+def svgtoarray(filecontent):	
 	moves = []
-	for  line in filecontent.readlines():
-                if line.startswith("d="):
-                        moves.append(line[3:-2])
+	for  line in filecontent:
+                if line.strip().startswith("d="):
+                        moves.append(line.strip()[5:-2])
 
                 else:      
                         pass
-	print(moves)
+	print(moves[0:100])
 	return moves 
 
 #------IF RUN DIRECTLY FROM TERMINAL------
 if __name__ == '__main__':
 	# The persistence file remembers the node you set. It'll generate the first time you run the
 	# file. If you are hooking up a new node, delete the previous persistence file.
-	stages = virtualMachine(persistenceFile = "machinefrancois.vmp")
+	#stages = virtualMachine(persistenceFile = "machinefrancois.vmp")
 
 	# You can load a new program onto the nodes if you are so inclined. This is currently set to 
 	# the path to the 086-005 repository on Nadya's machine. 
@@ -100,10 +99,17 @@ if __name__ == '__main__':
 	#Get file content
 	
 	f = open('waves.svg','r')
-	filestring = f.readlines()
+
+	lines = []
+	while(True):
+		line = f.readline()
+		if (line != ""):
+			lines.append(line)
+		else:
+			break
 	 
 	#Create move array
-	moves = svgtoarray(filestring)
+	moves = svgtoarray(lines)
 
 	# Move!
 	for move in moves:
