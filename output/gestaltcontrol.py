@@ -1,4 +1,4 @@
-fied Code from https://github.com/nadya/pygestalt by Nadya Peek
+#copied Code from https://github.com/nadya/pygestalt by Nadya Peek
 
 # Adapted for the purposes of a fabacademy final project by Francois Auclair
 
@@ -174,7 +174,7 @@ def svgtoarray(filecontent):
 
 			# Split into start and end coordinates
 
-			split = stripped[5:-4].split()
+			split = stripped[5:-1].split()
 
 
 
@@ -186,9 +186,9 @@ def svgtoarray(filecontent):
 
 				# grab path string (include "m" this time)
 
-				pathstring = stripped[3:-4]
+				pathstring = stripped[3:-1]
 
-				
+				print(pathstring)	
 
 				#use svg.path library  to parse string into path
 
@@ -214,7 +214,7 @@ def svgtoarray(filecontent):
 
 	print(moves[0:100])
 
-	print(moves[-100:-1])
+	print(moves[-100:])
 
 	return moves
 
