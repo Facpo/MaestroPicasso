@@ -31,12 +31,12 @@ import time
 import io
 
 
-
 # https://pypi.python.org/pypi/svgpathtools/1.2.1
-
 from svg.path import Path, parse_path
 
-
+#Longueur maximale 
+Xmachine = 400
+Ymachine = 400
 
 #------VIRTUAL MACHINE------
 
@@ -149,8 +149,21 @@ class virtualMachine(machines.virtualMachine):
 		pass
 
 
+#Code copied from https://stackoverflow.com/questions/1969240/mapping-a-range-of-values-to-another
+def map(value, leftMin, leftMax, rightMin, rightMax):
+    # Figure out how 'wide' each range is
+    leftSpan = leftMax - leftMin
+    rightSpan = rightMax - rightMin
 
+    # Convert the left range into a 0-1 range (float)
+    valueScaled = float(value - leftMin) / float(leftSpan)
 
+    # Convert the 0-1 range into a value in the right range.
+    return rightMin + (valueScaled * rightSpan)
+
+#Code copied from https://stackoverflow.com/questions/34837677/a-pythonic-way-to-write-a-constrain-function/34837691
+def constrain(val, min_val, max_val):
+    return min(max_val, max(min_val, val))
 
 def svgtoarray(filecontent):
 
@@ -198,11 +211,9 @@ def svgtoarray(filecontent):
 
 				#take start of path as move (we'll be drawing one continuous line)
 
-				move = [path[0].start.real, path[0].start.imag]
+				move = [map(constrain(path[0].start.real,0,1440), 0,1440, 0, Xmachine), map(constrain(path[0].start.imag, 0, 720), 0, 720, 0, Ymachine)]
 
 				moves.append(move)
-
-
 
 			else:
 
