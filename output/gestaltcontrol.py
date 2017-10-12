@@ -182,17 +182,14 @@ def svgtoarray(filecontent):
 		if stripped.startswith("d="):
 
 
-
 			# Split into start and end coordinates
 
 			split = stripped[5:-1].split()
 
 
-
 			# make sure this is one of the simple lines that has only two coordinates (no "H", "V", etC)
 
-			if len(split) == 2 and not split[0].isalpha() and not split[1].isalpha():
-
+			if len(split) > 0 :
 
 
 				# grab path string (include "m" this time)
@@ -206,12 +203,15 @@ def svgtoarray(filecontent):
 				path = parse_path(pathstring)
 
 
+				#draw 1000 points on the path
+				for i in range(int(path.length(error=1e-5))):
+					#print(i/10.0)
+					xy = path.point(float(i)/int(path.length(error=1e-5)))
+					x = xy.real
+					y = xy.imag
+					move = [map(constrain(x,0,1440), 0,1440, 0, Xmachine), map(constrain(y, 0, 720), 0, 720, 0, Ymachine)]
 
-				#take start of path as move (we'll be drawing one continuous line)
-
-				move = [map(constrain(path[0].start.real,0,1440), 0,1440, 0, Xmachine), map(constrain(path[0].start.imag, 0, 720), 0, 720, 0, Ymachine)]
-
-				moves.append(move)
+					moves.append(move)
 
 			else:
 
@@ -221,9 +221,9 @@ def svgtoarray(filecontent):
 
 	#for diagnostics
 
-	print(moves[0:100])
+	print(moves[:])
 
-	print(moves[-100:])
+#	print(moves[-100:])
 
 	return moves
 
