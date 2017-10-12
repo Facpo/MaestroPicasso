@@ -8,8 +8,6 @@
 
 from pygestalt import nodes
 
-
-
 from pygestalt import interfaces
 
 from pygestalt import machines
@@ -82,13 +80,13 @@ class virtualMachine(machines.virtualMachine):
 
 		# elements.elementChain.forward(
 
-    	# microstep => input microstepcount -> 1/microstepCount -> steps
+	    	# microstep => input microstepcount -> 1/microstepCount -> steps
 
-    	# stepper =>   input stepAngle (degrees) -> stepAngle/360 -> revolutions
+    		# stepper =>   input stepAngle (degrees) -> stepAngle/360 -> revolutions
 
-    	# pulley =>    input pitchDiameter (mm)
+	    	# pulley =>    input pitchDiameter (mm)
 
-    	# invert =>    if it is inputted backwards. false = its correct connection])
+    		# invert =>    if it is inputted backwards. false = its correct connection])
 
 		self.xAxis = elements.elementChain.forward([elements.microstep.forward(1), elements.stepper.forward(1.8), elements.pulley.forward(2.03), elements.invert.forward(False)])
 
@@ -280,9 +278,7 @@ if __name__ == '__main__':
 	stages.xyNode.setVelocityRequest(8)
 
 
-
 	# Move!
-
 	for move in moves:
 
 		stages.move(move, 0)
