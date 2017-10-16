@@ -52,7 +52,7 @@ void draw()
         recorded = true;
         String[] values = inString.split(" ");
         for (int i = 1; i < values.length; i++) {
-          myArray[sampleIndex][i] = Float.parseFloat(values[i]);
+          myArray[sampleIndex][i] = map (Float.parseFloat(values[i]),0,1024,0,height/16);
         }
         sampleIndex++;
       }
