@@ -37,7 +37,8 @@ void draw()
   if (recording) {
     if (firstSample) {
       if (Serial.list().length == 0) {
-        println(Serial.list().length);
+        
+        println("No serial ports available.");
         return;
       }
       myPort = new Serial(this, Serial.list()[0], 9600);
