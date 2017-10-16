@@ -36,6 +36,10 @@ void draw()
 {
   if (recording) {
     if (firstSample) {
+      if (Serial.list().length == 0) {
+        println(Serial.list().length);
+        return;
+      }
       myPort = new Serial(this, Serial.list()[0], 9600);
       myPort.clear();
       firstSample = false;
@@ -46,25 +50,21 @@ void draw()
       if (inString.startsWith(">")) {
         recorded = true;
         String[] values = inString.split(" ");
-        int i = 0;
-        for (String value : values) {
-          myArray[sampleIndex][i] = Float.parseFloat(value);
-          i++;
+        for (int i = 1; i < values.length; i++) {
+          myArray[sampleIndex][i] = Float.parseFloat(values[i]);
         }
         sampleIndex++;
       }
     }
-  } else if (recorded) {
-    createSVG();
   }
 }
 
 
 void createSVG() {
   //reset recorded state since were using up read values
-  recorded = false
+  recorded = false;
 
-  beginRecord(PDF, "filename.pdf");
+  beginRecord(PDF, "waves.pdf");
 
   for (int i=0; i < 7; i++) {
 
@@ -126,9 +126,12 @@ void keyPressed() {
       recording = true;
     } else {
       //Close port in case this isn't first recording session
-      myPort.stop();
+      if (recorded) {
+        myPort.stop();
+        firstSample = true;
+        createSVG();
+      }
       recording = false;
-      firstSample = true;
     }
   }
 }
