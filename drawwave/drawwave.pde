@@ -10,30 +10,40 @@ float amplitude=1;
 int cols = 7;
 int rows = 1440;
 float[][] myArray = new float[rows][cols];
+boolean recording = false;
+boolean recorded = false;
+
+
+
 
 void setup() {
-  noLoop();
+
   beginRecord(PDF, "filename.pdf");
 
-  for (int i =0; i < cols; i++) {
-    for (int j = 0; j < rows; j++) {
-      myArray[j][i] = random(0, height/16);
-    }
-  }
+  // Give random value
+  /* for (int i =0; i < cols; i++) {
+   for (int j = 0; j < rows; j++) {
+   myArray[j][i] = random(0, height/16);
+   }
+   } */
   size(1440, 720);
   background(0);
   stroke(255);
 }
 
+
 void draw()
 {
+}
 
+
+void createSVG() {
 
   for (int i=0; i < 7; i++) {
 
-
     translate(0, height/8);
 
+    // Downscalling Frenquency to fit a few cycles into the screen
     float frequence;
     float minRange = 0.8;
     float maxRange = 4;
@@ -78,6 +88,17 @@ void draw()
     }
 
     prevX = prevY = 0.0;
-    endRecord();
+  }
+
+  endRecord();
+}
+
+void keyPressed() {
+  if (key == 'r') {
+    if (recording == false) {
+      recording = true;
+    } else {
+      recording = false;
+    }
   }
 }
