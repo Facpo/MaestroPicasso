@@ -33,9 +33,10 @@ import io
 from svg.path import Path, parse_path
 
 #Longueur maximale 
-Xmachine = 400
-Ymachine = 400
-
+Xmachine = 300
+Ymachine = 150
+maxXsvg = 1440
+maxYsvg = 720
 #------VIRTUAL MACHINE------
 
 class virtualMachine(machines.virtualMachine):
@@ -209,7 +210,7 @@ def svgtoarray(filecontent):
 					xy = path.point(float(i)/int(path.length(error=1e-5)))
 					x = xy.real
 					y = xy.imag
-					move = [map(constrain(x,0,1440), 0,1440, 0, Xmachine), map(constrain(y, 0, 720), 0, 720, 0, Ymachine)]
+					move = [map(constrain(x,0,maxXsvg), 0,maxXsvg, 0, Xmachine), map(constrain(y, 0, maxYsvg), 0, maxYsvg, 0, Ymachine)]
 
 					moves.append(move)
 
