@@ -89,9 +89,9 @@ class virtualMachine(machines.virtualMachine):
 
     		# invert =>    if it is inputted backwards. false = its correct connection])
 
-		self.xAxis = elements.elementChain.forward([elements.microstep.forward(1), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(False)])
+		self.xAxis = elements.elementChain.forward([elements.microstep.forward(4), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(False)])
 
-		self.yAxis = elements.elementChain.forward([elements.microstep.forward(1), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(False)])
+		self.yAxis = elements.elementChain.forward([elements.microstep.forward(4), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(True)])
 
 
 
