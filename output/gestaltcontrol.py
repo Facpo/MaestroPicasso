@@ -91,13 +91,13 @@ class virtualMachine(machines.virtualMachine):
 
 		self.xAxis = elements.elementChain.forward([elements.microstep.forward(4), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(False)])
 
-		self.yAxis = elements.elementChain.forward([elements.microstep.forward(4), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(True)])
+		self.yAxis = elements.elementChain.forward([elements.microstep.forward(4), elements.stepper.forward(0.9), elements.pulley.forward(16), elements.invert.forward(False)])
 
 
 
 		# define an H-BOT configuration
 
-		self.stageKinematics = kinematics.hbot()        # add invertX = True, invertY = True if needed
+		self.stageKinematics = kinematics.hbot(invertY = True)        # add invertX = True, invertY = True if needed
 
 
 
